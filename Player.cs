@@ -29,13 +29,15 @@ namespace ReverieGame
 
         public override void Initialise()
         {
-            Movement movement = new Movement();
+            Transform transform = new Transform();
             Physics physics = new Physics();
 
-            movement.position = new System.Numerics.Vector2(0, 0);
+            transform.position = new System.Numerics.Vector2(0, 0);
 
-            AddComponent(movement);
+            AddComponent(transform);
             AddComponent(physics);
+
+            transform.Initialise(); // goes after AddComponents
 
             base.Initialise();
         }

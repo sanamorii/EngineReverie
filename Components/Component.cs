@@ -11,5 +11,6 @@ namespace ReverieGame.Components
     {
         public Entity entity;
         public virtual void Update(GameTime gameTime) { }
+        public virtual void Initialise() { }
     }
 }

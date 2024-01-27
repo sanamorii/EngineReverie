@@ -28,9 +28,9 @@ namespace ReverieGame.Components
     }
 
 
-    class InputSystem : ComponentSystem<Input> { }
+    class InputSystem : ComponentSystem<PlayerControllable> { }
 
-    class MovementSystem : ComponentSystem<Movement> { }
+    class TransformSystem : ComponentSystem<Transform> {    }
 
     class AnimatedSpriteSystem : ComponentSystem<AnimatedSprite> 
     {
@@ -38,7 +38,7 @@ namespace ReverieGame.Components
         {
             foreach (AnimatedSprite sprite in components)
             {
-                Movement movement = sprite.entity.GetComponent<Movement>();
+                Transform movement = sprite.entity.GetComponent<Transform>();
                 spriteBatch.Draw(sprite.texture, movement.position, Color.White);
             }
         }

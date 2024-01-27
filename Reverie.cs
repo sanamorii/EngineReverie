@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.DXGI;
 using System.Windows.Forms.VisualStyles;
+using System;
+using System.Net.NetworkInformation;
 
 namespace ReverieGame
 {
@@ -21,6 +23,7 @@ namespace ReverieGame
 
         public Reverie()
         {
+
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -58,10 +61,14 @@ namespace ReverieGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
 
             // TODO: Add your update logic here
+
+            PhysicsSystem.Update(gameTime);
+            TransformSystem.Update(gameTime);
+            AnimatedSpriteSystem.Update(gameTime);
 
             base.Update(gameTime);
         }
