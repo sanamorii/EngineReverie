@@ -4,6 +4,7 @@ using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,9 +33,9 @@ namespace ReverieGame.Components
 
     class TransformSystem : ComponentSystem<Transform> {    }
 
-    class AnimatedSpriteSystem : ComponentSystem<AnimatedSprite> 
+    class AnimatedSpriteSystem : ComponentSystem<AnimatedSprite>
     {
-        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             foreach (AnimatedSprite sprite in components)
             {
@@ -53,4 +54,6 @@ namespace ReverieGame.Components
         }
     }
     class PhysicsSystem : ComponentSystem<Physics> { }
+
+    class ControllerSystem : ComponentSystem<PlayerControllable> { }
 }

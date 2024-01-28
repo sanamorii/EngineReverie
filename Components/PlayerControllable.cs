@@ -14,11 +14,16 @@ namespace ReverieGame.Components
         //private MouseState _prevMouseState = new MouseState();
         //private GamePadState _gamePadState => GamePad.GetState();
 
+        private Physics physics;
 
+        public PlayerControllable()
+        {
+            ControllerSystem.Register(this);
+        }
 
         public override void Initialise()
         {
-
+            physics = this.entity.GetComponent<Physics>();
 
             base.Initialise();
         }
@@ -27,28 +32,28 @@ namespace ReverieGame.Components
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                direction.Y = -1;
+                physics.direction.Y = -1;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                direction.Y = 1;
+                physics.direction.Y = 1;
             }
             else
             {
-                direction.Y = 0;
+                physics.direction.Y = 0;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                direction.X = -1;
+                physics.direction.X = -1;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                direction.X = 1;
+                physics.direction.X = 1;
             }
             else
             {
-                direction.X = 0;
+                physics.direction.X = 0;
             }
             base.Update(gameTime);
         }

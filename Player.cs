@@ -1,7 +1,6 @@
 ﻿using ReverieGame.Components;
 
 using System;
-using System.Numerics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,13 +30,17 @@ namespace ReverieGame
         {
             Transform transform = new Transform();
             Physics physics = new Physics();
+            PlayerControllable controller = new PlayerControllable();
 
-            transform.position = new System.Numerics.Vector2(0, 0);
+            transform.position = new Vector2(0, 0);
 
+            AddComponent(controller);
             AddComponent(transform);
             AddComponent(physics);
 
             transform.Initialise(); // goes after AddComponents
+            physics.Initialise();
+            controller.Initialise();
 
             base.Initialise();
         }

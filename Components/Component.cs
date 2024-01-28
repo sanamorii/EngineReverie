@@ -10,6 +10,7 @@ namespace ReverieGame.Components
     internal class Component
     {
         public Entity entity;
+
         public virtual void Update(GameTime gameTime) { }
         public virtual void Initialise() { }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,11 @@ namespace ReverieGame.Components
         public AnimatedSprite()
         {
             AnimatedSpriteSystem.Register(this);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
         }
 
     }

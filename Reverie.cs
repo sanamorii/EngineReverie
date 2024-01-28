@@ -66,6 +66,7 @@ namespace ReverieGame
 
             // TODO: Add your update logic here
 
+            ControllerSystem.Update(gameTime);
             PhysicsSystem.Update(gameTime);
             TransformSystem.Update(gameTime);
             AnimatedSpriteSystem.Update(gameTime);
@@ -79,7 +80,7 @@ namespace ReverieGame
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            AnimatedSpriteSystem.Draw(spriteBatch, gameTime);
+            AnimatedSpriteSystem.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
