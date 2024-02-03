@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace ReverieGame.Components
 {
-    internal class PlayerControllable : Component
+    internal class KeyboardController : Component
     {
         //private KeyboardState _prevKeyboardState = new KeyboardState();
         //private MouseState _prevMouseState = new MouseState();
         //private GamePadState _gamePadState => GamePad.GetState();
 
         private Physics physics;
+        private float old;
 
-        public PlayerControllable()
+        public KeyboardController()
         {
             ControllerSystem.Register(this);
         }
@@ -24,37 +25,32 @@ namespace ReverieGame.Components
         public override void Initialise()
         {
             physics = this.entity.GetComponent<Physics>();
+            old = physics.maxSpeed; 
 
             base.Initialise();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            int up = Keyboard.GetState().IsKeyDown(Keys.W) ? 1 : 0;
+            int down = Keyboard.GetState().IsKeyDown(Keys.S) ? 1 : 0;
+
+            int left = Keyboard.GetState().IsKeyDown(Keys.A) ? 1 : 0;
+            int right = Keyboard.GetState().IsKeyDown(Keys.D) ? 1 : 0;
+
+            bool run = Keyboard.GetState().IsKeyDown(Keys.LeftShift) ? true : false;
+
+            if (run == true)
             {
-                physics.direction.Y = -1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                physics.maxSpeed = old * 1.5f;
+            } else
             {
-                physics.direction.Y = 1;
-            }
-            else
-            {
-                physics.direction.Y = 0;
+                physics.maxSpeed = old;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                physics.direction.X = -1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                physics.direction.X = 1;
-            }
-            else
-            {
-                physics.direction.X = 0;
-            }
+            physics.direction.X = right - left;
+            physics.direction.Y = down - up;
+
             base.Update(gameTime);
         }
 

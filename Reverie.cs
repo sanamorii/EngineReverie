@@ -1,4 +1,5 @@
 ﻿using ReverieGame.Components;
+using ReverieGame.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,6 +21,7 @@ namespace ReverieGame
 
         private Texture2D texture;
         private Player player;
+        private Stone stone;
 
         public Reverie()
         {
@@ -39,7 +41,9 @@ namespace ReverieGame
             // TODO: Add your initialization logic here
 
             player = new Player();
+            //stone = new Stone();
             player.Initialise();
+            //stone.Initialise();
 
             base.Initialize();
         }
@@ -48,6 +52,7 @@ namespace ReverieGame
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.LoadContent(Content);
+            //stone.LoadContent(Content);
 
 
             // TODO: use this.Content to load your game content here

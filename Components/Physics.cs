@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpDX.DXGI;
 using System.Transactions;
+using System.DirectoryServices;
 
 namespace ReverieGame.Components
 {
@@ -15,13 +16,15 @@ namespace ReverieGame.Components
     {
 
         public Vector2 velocity = Vector2.Zero;
-        public float friction = 2f;
-        public float acceleration = 100f;
-
-        public float maxSpeed = 200f;
-
-
         public Vector2 direction = new Vector2(0, 0);
+
+        private float magnitude = 0f;
+
+        public float friction { get; set; }
+        public float acceleration { get; set; }
+        public float maxSpeed { get; set; }
+
+        public bool runToggle { get; set; } 
 
         private Transform transform;
 
@@ -38,27 +41,26 @@ namespace ReverieGame.Components
 
         public override void Update(GameTime gameTime)
         {
-            var deltaTime = (float) gameTime.ElapsedGameTime.TotalSeconds;
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Vector2 dMaxSpeed = new Vector2(maxSpeed * deltaTime, maxSpeed* deltaTime);
+            Vector2 absDirection = new Vector2(Math.Abs(direction.X), Math.Abs(direction.Y));
 
             if (direction != Vector2.Zero)
             {
                 direction.Normalize();
-                velocity += direction * acceleration * deltaTime;
-            } else
-            {
-                velocity = Vector2.Zero;
+                absDirection.Normalize();
+
+                velocity += acceleration * direction * deltaTime;
+                velocity = Vector2.Clamp(velocity, absDirection * dMaxSpeed * -1, dMaxSpeed * absDirection);
+
             }
 
+            if (direction.X == 0) { velocity.X = Decelerate(velocity.X, friction * deltaTime); }
+            if (direction.Y == 0) { velocity.Y = Decelerate(velocity.Y, friction * deltaTime); }
 
-            transform.position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            transform.position += velocity;
 
-            Console.WriteLine(velocity.ToString());
-
-            /*velocity.X = Decelerate(velocity.X, deceleration);
-            velocity.Y = Decelerate(velocity.Y, deceleration);*/
-
-            //velocity = Vector2.Zero;
-
+            Console.WriteLine(deltaTime);
  
         }
 
@@ -67,6 +69,11 @@ namespace ReverieGame.Components
             if (val > 0f && (val -= amount) < 0f) return 0f;
             if (val < 0f && (val += amount) > 0f) return 0f;
             return val;
+        }
+
+        public Vector2 ClampMagnitude(Vector2 value1, Vector2 min, Vector2 max)
+        {
+            return new Vector2(MathHelper.Clamp(value1.X, min.X, max.X), MathHelper.Clamp(value1.Y, min.Y, max.Y));
         }
     }
 }

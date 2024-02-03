@@ -29,7 +29,7 @@ namespace ReverieGame.Components
     }
 
 
-    class InputSystem : ComponentSystem<PlayerControllable> { }
+    class InputSystem : ComponentSystem<KeyboardController> { }
 
     class TransformSystem : ComponentSystem<Transform> {    }
 
@@ -55,5 +55,5 @@ namespace ReverieGame.Components
     }
     class PhysicsSystem : ComponentSystem<Physics> { }
 
-    class ControllerSystem : ComponentSystem<PlayerControllable> { }
+    class ControllerSystem : ComponentSystem<KeyboardController> { }
 }

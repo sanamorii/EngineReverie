@@ -12,10 +12,16 @@ using Microsoft.Xna.Framework.Input;
 using System.Reflection.Metadata;
 using Microsoft.Xna.Framework.Content;
 
-namespace ReverieGame
+namespace ReverieGame.Entities
 {
     internal class Player : Entity
     {
+
+        Transform transform = new Transform();
+        Physics physics = new Physics();
+        KeyboardController controller = new KeyboardController();
+        AnimatedSprite sprite = new AnimatedSprite();
+
         public Player()
         {
 
@@ -28,11 +34,10 @@ namespace ReverieGame
 
         public override void Initialise()
         {
-            Transform transform = new Transform();
-            Physics physics = new Physics();
-            PlayerControllable controller = new PlayerControllable();
-
             transform.position = new Vector2(0, 0);
+            physics.acceleration = 120f;
+            physics.friction = 100f;
+            physics.maxSpeed = 300f;
 
             AddComponent(controller);
             AddComponent(transform);
@@ -47,8 +52,6 @@ namespace ReverieGame
 
         public override void LoadContent(ContentManager Content)
         {
-            AnimatedSprite sprite = new AnimatedSprite();
-
             sprite.texture = Content.Load<Texture2D>("idle_single");
 
             AddComponent(sprite);

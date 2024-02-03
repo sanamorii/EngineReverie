@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReverieGame
+namespace ReverieGame.Entities
 {
     internal class Entity
     {
